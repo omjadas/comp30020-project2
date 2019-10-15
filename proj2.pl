@@ -4,6 +4,15 @@
 % Author   : Omja Das <odas@student.unimelb.edu.au>
 % Purpose  : A solver for maths puzzles
 
+% A maths puzzle is made up of a grid of squares, each square must be filled
+% with the digits 1-9, such that no digits are repeated for each row and
+% column, all of the squares on the diagonal are equal, and the numbers in each
+% row and column either form the sum or the product of their respective
+% heading.
+%
+% The program in this file can be used to generate solutions for a given maths
+% puzzle.
+
 %! puzzle_solution(+Puzzle)
 %  Solves / verifies a maths puzzle
 puzzle_solution(Puzzle) :-
@@ -77,6 +86,7 @@ my_sum_list(List, Sum) :-
     my_sum_list(List, 0, Sum).
 
 %! my_sum_list(-List, -Accumulator, -Sum)
+%! Tail-recursive my_sum_list
 my_sum_list([],Sum,Sum).
 my_sum_list([X|Xs], A, Sum) :-
     A1 #= A+X,
@@ -88,6 +98,7 @@ product_list(List, Product) :-
     product_list(List, 1, Product).
 
 %! product_list(-List, -Accumulator, -Product)
+%  Tail-recursive my_product_list
 product_list([], Product, Product).
 product_list([X|Xs], A, Product) :-
     A1 #= X*A,
