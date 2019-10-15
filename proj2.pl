@@ -6,8 +6,8 @@ puzzle_solution(Solution) :-
     transpose(Solution, Transposed_Solution),
     repeats_puzzle(Solution),
     repeats_puzzle(Transposed_Solution),
-    valid(Solution),
-    valid(Transposed_Solution),
+    valid_puzzle(Solution),
+    valid_puzzle(Transposed_Solution),
     ground(Solution).
 
 diagonal([_, R|Rs]) :-
@@ -32,7 +32,7 @@ repeats_puzzle([_|Rs]) :-
 repeats([_|Rs]) :-
     is_set(Rs).
 
-valid([_|Rs]) :- maplist(valid_row, Rs).
+valid_puzzle([_|Rs]) :- maplist(valid_row, Rs).
 
 valid_row(Row) :-
     product_row(Row);
