@@ -25,8 +25,7 @@ digits([_, [_|R]|Rs]) :-
     digits([_, Rs]).
 
 digit(X) :-
-    X>=1,
-    X=<9.
+    between(1,9,X).
 
 repeats_puzzle([_|Rs]) :-
     maplist(repeats, Rs).
