@@ -10,39 +10,39 @@ puzzle_solution(Solution) :-
     valid_puzzle(Transposed_Solution),
     maplist(labeling([]), Solution).
 
-diagonal([_, R|Rs]) :-
-    nth0(1, R, X),
-    diagonal(Rs, 2, X).
+diagonal([_, Row|Rows]) :-
+    nth0(1, Row, X),
+    diagonal(Rows, 2, X).
 
 diagonal([], _, _).
-diagonal([R|Rs], I, X) :-
-    nth0(I, R, X),
+diagonal([Row|Rows], I, X) :-
+    nth0(I, Row, X),
     I1 #= I+1,
-    diagonal(Rs, I1, X).
+    diagonal(Rows, I1, X).
 
-digits([_|Rs]) :-
-    maplist(digit, Rs).
+digits([_|Rows]) :-
+    maplist(digit, Rows).
 
-digit([_|Rs]) :-
-    Rs ins 1..9.
+digit([_|Rows]) :-
+    Rows ins 1..9.
 
-repeats_puzzle([_|Rs]) :-
-    maplist(repeats, Rs).
+repeats_puzzle([_|Rows]) :-
+    maplist(repeats, Rows).
 
-repeats([_|Rs]) :-
-    is_set(Rs).
+repeats([_|Rows]) :-
+    is_set(Rows).
 
-valid_puzzle([_|Rs]) :- maplist(valid_row, Rs).
+valid_puzzle([_|Rows]) :- maplist(valid_row, Rows).
 
 valid_row(Row) :-
     product_row(Row);
     sum_row(Row).
 
-product_row([R|Rs]) :-
-    product_list(Rs, 1, R).
+product_row([Row|Rows]) :-
+    product_list(Rows, 1, Row).
 
-sum_row([R|Rs]) :-
-    my_sum_list(Rs, R).
+sum_row([Row|Rows]) :-
+    my_sum_list(Rows, Row).
 
 my_sum_list(List, Sum) :-
     my_sum_list(List, 0, Sum).
