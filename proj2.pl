@@ -20,20 +20,21 @@ diagonal([R|Rs], I, X) :-
     I1 is I+1,
     diagonal(Rs, I1, X).
 
+digits([_]).
+digits([_, [_|R]]) :-
+    maplist(digit, R).
 digits([_, [_|R]|Rs]) :-
     maplist(digit, R),
     digits([_, Rs]).
 
 digit(X) :-
-    between(1,9,X).
+    between(1, 9, X).
 
 repeats_puzzle([_|Rs]) :-
     maplist(repeats, Rs).
 
-repeats([_, R]) :-
-    sort(R, Sorted_R),
-    length(R, L),
-    length(Sorted_R, L).
+repeats([_|R]) :-
+    is_set(R).
 
 valid([_|Rs]) :-
     maplist(product_row, Rs),
