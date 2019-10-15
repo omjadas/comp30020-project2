@@ -29,25 +29,34 @@ digit([_|Rs]) :-
 repeats_puzzle([_|Rs]) :-
     maplist(repeats, Rs).
 
-repeats([_|R]) :-
-    is_set(R).
+repeats([_|Rs]) :-
+    is_set(Rs).
 
-valid([_|Rs]) :-
-    maplist(product_row, Rs);
-    maplist(sum_row, Rs).
+valid([_|Rs]) :- maplist(valid_row, Rs).
 
-product_list([], 1).
-product_list([X|Xs], P) :-
-    product_list(Xs, P1),
-    P #= X*P1.
+valid_row(Row) :-
+    product_row(Row);
+    sum_row(Row).
 
 product_row([R|Rs]) :-
-    product_list(Rs, R).
+    product_list(Rs, 1, R).
 
 sum_row([R|Rs]) :-
     my_sum_list(Rs, R).
 
-my_sum_list([], 0).
-my_sum_list([X|Xs], Sum) :-
-    my_sum_list(Xs, Sum1),
-    Sum #= X+Sum1.
+my_sum_list(List, Sum) :-
+    my_sum_list(List, 0, Sum).
+
+my_sum_list([],Sum,Sum).
+my_sum_list([X|Xs], A, Sum):-
+    A1 #= A+X,
+    my_sum_list(Xs, A1, Sum).
+
+product_list(List, Product):-
+    product_list(List, 1, Product).
+
+product_list([], Product, Product).
+product_list([X|Xs], A, Product) :-
+    A1 #= X*A,
+    product_list(Xs, A1, Product).
+
