@@ -37,13 +37,13 @@ repeats([_|R]) :-
     is_set(R).
 
 valid([_|Rs]) :-
-    maplist(product_row, Rs),
+    maplist(product_row, Rs);
     maplist(sum_row, Rs).
 
 product_list([], 1).
 product_list([X|Xs], P) :-
     product_list(Xs, Ps),
-    P is X*Ps.
+    P #= X*Ps.
 
 product_row([R|Rs]) :-
     product_list(Rs, R).
