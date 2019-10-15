@@ -17,18 +17,14 @@ diagonal([_, R|Rs]) :-
 diagonal([], _, _).
 diagonal([R|Rs], I, X) :-
     nth0(I, R, X),
-    I1 is I+1,
+    I1 #= I+1,
     diagonal(Rs, I1, X).
 
-digits([_]).
-digits([_, [_|R]]) :-
-    maplist(digit, R).
-digits([_, [_|R]|Rs]) :-
-    maplist(digit, R),
-    digits([_, Rs]).
+digits([_|Rs]) :-
+    maplist(digit, Rs).
 
-digit(X) :-
-    between(1, 9, X).
+digit([_|Rs]) :-
+    Rs ins 1..9.
 
 repeats_puzzle([_|Rs]) :-
     maplist(repeats, Rs).
@@ -42,11 +38,16 @@ valid([_|Rs]) :-
 
 product_list([], 1).
 product_list([X|Xs], P) :-
-    product_list(Xs, Ps),
-    P #= X*Ps.
+    product_list(Xs, P1),
+    P #= X*P1.
 
 product_row([R|Rs]) :-
     product_list(Rs, R).
 
 sum_row([R|Rs]) :-
-    sum_list(Rs, R).
+    my_sum_list(Rs, R).
+
+my_sum_list([], 0).
+my_sum_list([X|Xs], Sum) :-
+    my_sum_list(Xs, Sum1),
+    Sum #= X+Sum1.
