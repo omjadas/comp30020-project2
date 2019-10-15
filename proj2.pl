@@ -8,7 +8,7 @@ puzzle_solution(Solution) :-
     repeats_puzzle(Transposed_Solution),
     valid_puzzle(Solution),
     valid_puzzle(Transposed_Solution),
-    ground(Solution).
+    maplist(labeling([]), Solution).
 
 diagonal([_, R|Rs]) :-
     nth0(1, R, X),
@@ -59,4 +59,3 @@ product_list([], Product, Product).
 product_list([X|Xs], A, Product) :-
     A1 #= X*A,
     product_list(Xs, A1, Product).
-
