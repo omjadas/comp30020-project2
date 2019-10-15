@@ -10,12 +10,12 @@ puzzle_solution(Solution) :-
     valid(Transposed_Solution),
     ground(Solution).
 
-diagonal([_, [_|R]|Rs]) :-
+diagonal([_, R|Rs]) :-
     nth0(1, R, X),
     diagonal(Rs, 2, X).
 
 diagonal([], _, _).
-diagonal([[_|R]|Rs], I, X) :-
+diagonal([R|Rs], I, X) :-
     nth0(I, R, X),
     I1 is I+1,
     diagonal(Rs, I1, X).
