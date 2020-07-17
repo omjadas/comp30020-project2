@@ -1,1 +1,1 @@
-# comp30020-project2
+# maths-puzzles
